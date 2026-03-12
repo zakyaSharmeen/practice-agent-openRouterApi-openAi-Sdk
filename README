@@ -1,0 +1,22 @@
+import { Agent, run } from "@openai/agents"; // Import Agent class and run function from the OpenAI Agents SDK
+
+import "dotenv/config"; // Automatically loads environment variables from a .env file
+
+process.env.OPENAI_AGENTS_DISABLE_TRACING = "1"; // Disables tracing/logging for the agents SDK
+
+const helloAgent = new Agent({ // Create a new AI agent instance and store it in helloAgent
+name: "HelloAgent", // Name of the agent (useful for identification and debugging)
+
+instructions:
+"You are a helpful assistant that greets the user with their name and says positive thoughts.", // Instructions that guide how the agent should behave
+
+model: "openai/gpt-4o", // Specifies which model the agent should use
+});
+
+async function main() { // Define an asynchronous function called main
+const result = await run(helloAgent, "Hello there! my name is rani"); // Run the agent with the given user input and wait for the response
+
+console.log("Agent response:", result.finalOutput); // Print the agent's final response to the console
+}
+
+main(); // Call the main function to start the program
