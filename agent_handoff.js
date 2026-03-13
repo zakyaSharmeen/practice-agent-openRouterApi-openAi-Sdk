@@ -117,10 +117,10 @@ async function runAgent(query = "") {
 }
 
 // runAgent("What are the available internet plans?");
-// runAgent(
-//   "hey there tell me about the available plans and the best plan for me? buget around 1000 and i want to use it for my home",
-// );
-
 runAgent(
-  "hi i am an existing customer and i want to cancel my subscription and get a refund, can you help me with that? my id is cust456789 because i am moving to another city and i will not be needing the service anymore",
+  "hey there tell me about the available plans and the best plan for me? buget around 1000 and i want to use it for my home",
 );
+
+// runAgent(
+//   "hi i am an existing customer and i want to cancel my subscription and get a refund, can you help me with that? my id is cust456789 because i am moving to another city and i will not be needing the service anymore",
+// );
