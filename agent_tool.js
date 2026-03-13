@@ -40,12 +40,12 @@
 // main("What is the weather like in delhi, goa, patiala today?");
 
 /////////////////
-import { Agent, run, tool } from "@openai/agents";
+process.env.OPENAI_AGENTS_DISABLE_TRACING = "true";
 import "dotenv/config";
+
+import { Agent, run, tool } from "@openai/agents";
 import z from "zod";
 import axios from "axios";
-
-process.env.OPENAI_AGENTS_DISABLE_TRACING = "1";
 
 //tool to get weather information
 
@@ -88,10 +88,13 @@ const agent = new Agent({
   name: "weather Agent",
   instructions: "You are an assistant that provides weather information.",
   model: "openai/gpt-4o",
+  //   model: "openai/gpt-4o-mini",
+  //   model: "openai/gpt-4.1",
+  model: "openai/gpt-4.1-mini",
   tools: [getWeatherTool, sendEmailTool],
 });
 
-///question
+///user ask this question
 async function main(query = "") {
   const result = await run(agent, query);
   console.log("Agent response:", result.finalOutput);

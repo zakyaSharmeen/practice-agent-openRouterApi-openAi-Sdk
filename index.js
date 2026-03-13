@@ -31,9 +31,11 @@
 
 ////////////////////////////////////////////////////////////////
 /////////////openai
-import { Agent, run } from "@openai/agents";
+process.env.OPENAI_AGENTS_DISABLE_TRACING = "true";
 import "dotenv/config";
-process.env.OPENAI_AGENTS_DISABLE_TRACING = "1";
+
+import { Agent, run } from "@openai/agents";
+// process.env.OPENAI_AGENTS_DISABLE_TRACING = "1";
 
 const location = "usa";
 // agent answeruser question------------------
@@ -42,7 +44,7 @@ const helloAgent = new Agent({
   // instructions:
   //   "You are a helpful assistant that greets the user with their name and says positive thoughts.",
   instructions: function () {
-    if (location === "ïndia") {
+    if (location === "india") {
       return "always say namaste and wish the user with their name and say hello";
     } else {
       return "then just talk to the user";
