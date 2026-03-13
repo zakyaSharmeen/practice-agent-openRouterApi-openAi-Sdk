@@ -1,6 +1,6 @@
 process.env.OPENAI_AGENTS_DISABLE_TRACING = "true";
 import "dotenv/config";
-import { Agent, run } from "@openai/agents";
+import { Agent, InputGuardrailTripwireTriggered, run } from "@openai/agents";
 import { z } from "zod";
 
 //agent
@@ -20,9 +20,15 @@ const mathInputAgent = new Agent({
 const mathInputGuardrails = {
   name: "Math Homework Guardrails",
   execute: async ({ input }) => {
-    console.log("INPUT GUARDRAILS CHECKED::::::::::::::", input);
+    console.log(
+      "Coming from guardrails--- INPUT GUARDRAILS CHECKED::::::::::::::",
+      input,
+    );
     const result = await run(mathInputAgent, input);
-    console.log("INPUT GUARDRAILS RESULT::::::::::::::", result.finalOutput);
+    console.log(
+      "Coming from guardrails--- INPUT GUARDRAILS RESULT::::::::::::::",
+      result.finalOutput,
+    );
 
     return {
       tripwireTriggered: result.finalOutput.isValidMathQuestion ? false : true,
@@ -41,15 +47,27 @@ const mathAgent = new Agent({
 
 ///user-question
 async function main(query = "") {
-  const result = await run(mathAgent, query);
-  console.log(
-    "AGENTS RESPONSE::::::::::::::::::::::::::::",
-    result.finalOutput,
-  );
+  try {
+    const result = await run(mathAgent, query);
+    console.log(
+      "Coming from the user's query main function---- AGENTS RESPONSE::::::::::::::::::::::::::::",
+      result.finalOutput,
+    );
+  } catch (err) {
+    if (err instanceof InputGuardrailTripwireTriggered) {
+      console.log(
+        "OOPSSS! Maths Questions Only ,Input guardrail tripwire triggered!",
+      );
+    } else {
+      console.error("Error executing agent:", err);
+    }
+  }
 }
 // main("What is 2 + 2 *8/4?");
 // main("write a js code to calcute sum of 2 numbers");
-main("write a poem to my crush");
+// main("12*12");/
+// main("also what is 12*12? What is the capital of France?,");//true ???? not
+main("What is the capital of France?"); //false
 
 ///see here if u asking it to write code it will write the code and then execute the code and give you the answer, it is not just writing the code but also executing it and giving you the answer.
 // and now we will put limitation to it using -guardrails
