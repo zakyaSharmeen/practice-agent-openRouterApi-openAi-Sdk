@@ -48,8 +48,8 @@ async function main(query = "") {
   );
 }
 // main("What is 2 + 2 *8/4?");
-main("write a js code to calcute sum of 2 numbers");
-main("write a js code to calcute sum of 2 numbers");
+// main("write a js code to calcute sum of 2 numbers");
+main("write a poem to my crush");
 
 ///see here if u asking it to write code it will write the code and then execute the code and give you the answer, it is not just writing the code but also executing it and giving you the answer.
 // and now we will put limitation to it using -guardrails
