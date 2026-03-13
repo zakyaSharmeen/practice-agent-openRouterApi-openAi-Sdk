@@ -17,4 +17,5 @@ async function main(query = "") {
     result.finalOutput,
   );
 }
-main("What is 2 + 2 *8/4?");
+// main("What is 2 + 2 *8/4?");
+main("2^3");
