@@ -3,6 +3,7 @@ import "dotenv/config";
 import { Agent, run, tool } from "@openai/agents";
 import { z } from "zod";
 
+//thread or conversation history
 let sharedHistorty = [];
 
 //sql agents's tool
@@ -62,8 +63,14 @@ async function main(q = "") {
 
 //run finction complete one turn of the agent, you can call it multiple times to have a conversation with the agent.
 
-main("hii, my name is deepak rai sharma").then(() => {
-  main("get me all the users with my name");
-});
+// main("hii, my name is deepak rai sharma").then(() => {
+//   main("get me all the users with my name");
+// });
 
 // main("hii my name is rani");
+
+//here the agent remembers the answer of the 1st turn and then later used it while answering the 2nd related question
+//which is called threads
+main("What city is the Golden Gate Bridge in?").then(() => {
+  main("What state is it in?");
+});
