@@ -17,7 +17,10 @@
                                     "id": "fc_tmp_197rmkcdcgc",
                                     "type": "function_call"
                                 }
-                            }
-                           
+                            },
+                            "agent": {
+                                "name": "weather Agent"
+                            },
+                            "toolName": "sendEmail"
                         }
                     }}
