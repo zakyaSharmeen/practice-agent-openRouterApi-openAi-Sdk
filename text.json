@@ -1,0 +1,26 @@
+                {
+                    "type": "tool_approval_item",
+                    "rawItem": {
+                        "type": "function_call",
+                        "id": "fc_tmp_197rmkcdcgc",
+                        "callId": "call_9PVm1riYeVRRWHgwB7ayi8fn","Agent weather Agenis asking for calling  tool"
+                {
+                            "type": "tool_approval_item",
+                            "rawItem": {
+                                "type": "function_call",
+                                "id": "fc_tmp_197rmkcdcgc",
+                                "callId": "call_9PVm1riYeVRRWHgwB7ayi8fn",
+                                "name": "sendEmail",
+                                "status": "completed",
+                                "arguments": "{\"toEmail\": \"testing70082@gmail.com\", \"subject\": \"Weather Information for Odisha\", \"body\": \"Fetching the weather information. Please check back soon.\"}",
+                                "providerData": {
+                                    "id": "fc_tmp_197rmkcdcgc",
+                                    "type": "function_call"
+                                }
+                            },
+                            "agent": {
+                                "name": "weather Agent"
+                            },
+                            "toolName": "sendEmail"
+                        }
+                    }}
