@@ -1,21 +1,23 @@
 import "dotenv/config";
-import { Agent, tool, run, hostedMcpTool } from "@openai/agents";
+import { Agent, run, MCPServerStreamableHttp } from "@openai/agents";
+
+const mcpServer = new MCPServerStreamableHttp({
+  url: "https://gitmcp.io/openai/codex",
+  name: "GitMCP Documentation Server",
+});
+
 const agent = new Agent({
   name: "MCP Assistant",
   instructions: "You must always use the MCP tools to answer questions.",
-  tools: [
-    //LLM ─────► (connects to MCP server)
-    hostedMcpTool({
-      serverLabel: "gitmcp",
-      //serverUrl  = WHERE the tool is
-      serverUrl: "https://gitmcp.io/openai/codex",
-    }),
-  ],
+
+  mcpServers: [mcpServer],
 });
 
 async function main(q: string) {
+  await mcpServer.connect();
   const result = await run(agent, q);
   console.log(result.finalOutput);
+  await mcpServer.close();
 }
 // main("what is this repositary about?");
 // your query = WHAT to use it on
