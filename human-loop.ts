@@ -4,7 +4,6 @@ import axios from "axios";
 import { z } from "zod";
 import nodemailer from "nodemailer";
 import readline from "node:readline/promises";
-import { log } from "node:console";
 
 const getWeatherTool = tool({
   name: "getWeather",
@@ -148,4 +147,4 @@ async function main(q: string) {
 //   "Get weather of Delhi and send it to my email-zakyasharmeen@gmail.com subject-weather in delhi",
 // );
 
-main("Get the current weather in Mumbai and send it to ram@gmail.com");
+main("Get the current weather in delhi and send it to ram@gmail.com");
