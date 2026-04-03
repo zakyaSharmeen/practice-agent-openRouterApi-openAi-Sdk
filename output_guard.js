@@ -121,6 +121,18 @@ import "dotenv/config";
 import { Agent, run, OutputGuardrailTripwireTriggered } from "@openai/agents";
 import { z } from "zod";
 
+//  Agent (Guardrail Agent)
+const sqlGuardrailAgent = new Agent({
+  name: "SQL Guardrail Agent",
+  instructions: `Check if the SQL query is safe.
+  you only allow to read and not delete, update or modify the data in any way.`,
+
+  model: "openai/gpt-4o",
+  outputType: z.object({
+    reason: z.string().describe("Reason why the query is unsafe"),
+    isSafe: z.boolean().describe("Whether the query is safe"),
+  }),
+});
 //Gatekeeper Output  Guardrail
 const sqlGuardrail = {
   name: "SQL Guardrail",
@@ -149,19 +161,6 @@ const sqlGuardrail = {
     };
   },
 };
-
-//  Agent (Guardrail Agent)
-const sqlGuardrailAgent = new Agent({
-  name: "SQL Guardrail Agent",
-  instructions: `Check if the SQL query is safe.
-  you only allow to read and not delete, update or modify the data in any way.`,
-
-  model: "openai/gpt-4o",
-  outputType: z.object({
-    reason: z.string().describe("Reason why the query is unsafe"),
-    isSafe: z.boolean().describe("Whether the query is safe"),
-  }),
-});
 
 // SQL Agent
 const sqlAgent = new Agent({
